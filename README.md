@@ -99,8 +99,8 @@ chat-app-react-nodejs/
 
 ### Step 1 — Clone the repository
 ```bash
-git clone https://github.com/Rizwansheik666/chat-app-react-nodejs.git
-cd chat-app-react-nodejs
+git clone https://github.com/Rizwansheik666/live_chat_app.git
+cd live_chat_app
 ```
 
 ### Step 2 — Setup environment variables

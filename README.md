@@ -114,7 +114,7 @@ cp .env.example .env
 Open `server/.env` and update:
 ```env
 PORT=5000
-MONGO_URL=mongodb://localhost:27017/snappy
+MONGO_URL=mongodb://localhost:27017
 ```
 
 For frontend:

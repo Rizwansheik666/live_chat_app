@@ -1,68 +1,214 @@
-# Snappy - Chat Application 
-Snappy is chat application build with the power of MERN Stack. You can find the tutorial [here](https://www.youtube.com/watch?v=otaQKODEUFs)
+# ✨ Talky App — Real-Time Chat Application
 
+> A beautiful real-time chat application built with the MERN Stack and Socket.io
 
-![login page](./images/snappy_login.png)
+![Login Page](./images/login.png)
+![Chat Page](./images/chat.png)
 
-![home page](./images/snappy.png)
+---
 
-## Installation Guide
+## 🚀 Features
 
-### Requirements
-- [Nodejs](https://nodejs.org/en/download)
-- [Mongodb](https://www.mongodb.com/docs/manual/administration/install-community/)
+- 🔐 **User Authentication** — Register & Login securely
+- 🎭 **Avatar Selection** — Pick a unique avatar after registration
+- 💬 **Real-Time Messaging** — Instant messaging powered by Socket.io
+- 👥 **Multiple Users** — Chat with any registered user
+- 🔒 **Password Hashing** — Bcrypt keeps passwords safe
+- 📱 **Responsive UI** — Clean and modern pink-themed design
 
-Both should be installed and make sure mongodb is running.
-### Installation
+---
 
-#### First Method
-```shell
-git clone https://github.com/koolkishan/chat-app-react-nodejs
+## 🛠️ Tech Stack
+
+### 🎨 Frontend
+| Technology | Purpose |
+|---|---|
+| React.js | UI Framework |
+| Socket.io-client | Real-time communication |
+| Axios | API requests |
+| React Router DOM | Page navigation |
+| Styled Components | CSS styling |
+| React Toastify | Toast notifications |
+| Multiavatar | Avatar generation |
+
+### ⚙️ Backend
+| Technology | Purpose |
+|---|---|
+| Node.js | Runtime environment |
+| Express.js | Web framework |
+| Socket.io | Real-time communication |
+| Mongoose | MongoDB object modeling |
+| MongoDB | Database |
+| Bcrypt | Password hashing |
+| CORS | Cross-origin requests |
+| Dotenv | Environment variables |
+
+### 🧰 Tools
+| Tool | Purpose |
+|---|---|
+| Git | Version control |
+| Yarn | Package manager |
+| Docker & Docker Compose | Containerization (optional) |
+
+---
+
+## 📁 Project Structure
+
+```
+chat-app-react-nodejs/
+├── public/                  → React Frontend
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── Register.jsx     → Registration page
+│   │   │   ├── Login.jsx        → Login page
+│   │   │   ├── SetAvatar.jsx    → Avatar selection page
+│   │   │   └── Chat.jsx         → Main chat page
+│   │   ├── components/
+│   │   │   ├── ChatContainer.jsx → Chat messages UI
+│   │   │   ├── ChatInput.jsx     → Message input box
+│   │   │   ├── Contacts.jsx      → Contacts sidebar
+│   │   │   ├── Welcome.jsx       → Welcome screen
+│   │   │   └── Logout.jsx        → Logout button
+│   │   └── App.js               → Routes configuration
+│   └── .env                     → Frontend environment variables
+│
+├── server/                  → Node.js Backend
+│   ├── controllers/
+│   │   ├── userController.js    → Auth logic
+│   │   └── messageController.js → Message logic
+│   ├── models/
+│   │   ├── userModel.js         → User schema
+│   │   └── messageModel.js      → Message schema
+│   ├── routes/
+│   │   ├── auth.js              → Auth routes
+│   │   └── messages.js          → Message routes
+│   ├── index.js                 → Server entry point
+│   └── .env                     → Backend environment variables
+│
+└── docker-compose.yml       → Docker setup (optional)
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### Prerequisites
+- [Node.js](https://nodejs.org/en/download)
+- [MongoDB](https://www.mongodb.com/docs/manual/administration/install-community/)
+- [Yarn](https://yarnpkg.com/)
+
+### Step 1 — Clone the repository
+```bash
+git clone https://github.com/Rizwansheik666/chat-app-react-nodejs.git
 cd chat-app-react-nodejs
 ```
-Now rename env files from .env.example to .env
-```shell
-cd public
-mv .env.example .env
-cd ..
+
+### Step 2 — Setup environment variables
+
+For server:
+```bash
 cd server
-mv .env.example .env
-cd ..
+cp .env.example .env
 ```
 
-Now install the dependencies
-```shell
+Open `server/.env` and update:
+```env
+PORT=5000
+MONGO_URL=mongodb://localhost:27017/snappy
+```
+
+For frontend:
+```bash
+cd public
+cp .env.example .env
+```
+
+`public/.env` should have:
+```env
+REACT_APP_LOCALHOST_KEY="chat-app-current-user"
+```
+
+### Step 3 — Install dependencies
+
+Backend:
+```bash
 cd server
 yarn
-cd ..
+```
+
+Frontend:
+```bash
 cd public
 yarn
 ```
-We are almost done, Now just start the development server.
 
-For Frontend.
-```shell
+### Step 4 — Start MongoDB
+```bash
+# Windows
+net start MongoDB
+
+# Linux/Mac
+sudo systemctl start mongod
+```
+
+### Step 5 — Run the application
+
+Backend (Terminal 1):
+```bash
+cd server
+yarn start
+```
+
+Frontend (Terminal 2):
+```bash
 cd public
 yarn start
 ```
-For Backend.
 
-Open another terminal in folder, Also make sure mongodb is running in background.
-```shell
-cd server
-yarn start
+Now open **http://localhost:3000** in your browser 🎉
+
+---
+
+## 🔄 How It Works
+
 ```
-Done! Now open localhost:3000 in your browser.
+User opens browser (localhost:3000)
+        ↓
+React.js renders UI → React Router handles navigation
+        ↓
+User registers → Axios sends data to Express API
+        ↓
+Express → Bcrypt hashes password → Mongoose saves to MongoDB
+        ↓
+User logs in → User data saved in localStorage
+        ↓
+User picks avatar → Multiavatar generates options
+        ↓
+Chat page opens → Socket.io connects in real-time
+        ↓
+User sends message → Socket.io emits to server
+        ↓
+Server saves to MongoDB → Broadcasts to receiver instantly
+```
 
-#### Second Method
-- This method requires docker and docker-compose to be installed in your system.
-- Make sure you are in the root of your project and run the following command.
+---
 
-```shell
+## 🐳 Docker Setup (Optional)
+
+```bash
 docker compose build --no-cache
-```
-after the build is complete run the containers using the following command
-```shell
 docker compose up
 ```
-now open localhost:3000 in your browser.
+
+Then open **http://localhost:3000**
+
+---
+
+## 👨‍💻 Author
+
+**Rizwan Sheik**
+- GitHub: [@Rizwansheik666](https://github.com/Rizwansheik666)
+
+---
+
+⭐ If you found this project helpful, please give it a star!
